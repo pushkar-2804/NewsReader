@@ -6,6 +6,8 @@ import NewsGrid from "./components/NewsGrid";
 import NewsList from "./components/NewsList";
 import { Provider } from "react-redux";
 import store from "./store";
+import Navbar from "./components/Navbar";
+import { AuthProvider } from "./utils/Firebase";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -15,6 +17,7 @@ const Home = () => {
     async function fetchArticles() {
       try {
         const fetchedArticles = await fetchNewsArticles();
+        // console.log(fetchedArticles);
         setArticles(fetchedArticles);
       } catch (error) {
         console.error("Error fetching news articles:", error);
@@ -26,17 +29,19 @@ const Home = () => {
 
   return (
     <Provider store={store}>
-      <div>
-        <h1>Latest News</h1>
-        <button onClick={() => setIsGridView(!isGridView)}>
-          {isGridView ? "Switch to List View" : "Switch to Grid View"}
-        </button>
-        {isGridView ? (
-          <NewsGrid articles={articles} />
-        ) : (
-          <NewsList articles={articles} />
-        )}
-      </div>
+      <AuthProvider>
+        <Navbar />
+        <div>
+          <button onClick={() => setIsGridView(!isGridView)}>
+            {isGridView ? "Switch to List View" : "Switch to Grid View"}
+          </button>
+          {isGridView ? (
+            <NewsGrid articles={articles} />
+          ) : (
+            <NewsList articles={articles} />
+          )}
+        </div>
+      </AuthProvider>
     </Provider>
   );
 };

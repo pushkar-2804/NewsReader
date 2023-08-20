@@ -1,8 +1,8 @@
 // utils/api.js
-const API_KEY = "a7d078a5e5994af4b9fcb99d298510cc"; // Replace with your actual API key
+const API_KEY = "a7d078a5e5994af4b9fcb99d298510cc";
 
 const API_URL = "https://newsapi.org/v2/top-headlines";
-const DEFAULT_COUNTRY = "in"; // You can customize this based on user preferences
+const DEFAULT_COUNTRY = "in";
 
 // Fetch news articles from the News API
 export async function fetchNewsArticles() {

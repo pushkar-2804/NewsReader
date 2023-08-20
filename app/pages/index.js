@@ -1,6 +1,5 @@
 // pages/index.js
 import React, { useEffect, useState } from "react";
-
 import NewsList from "../components/NewsList";
 import NewsGrid from "../components/NewsGrid";
 import { fetchNewsArticles } from "../utils/Api";

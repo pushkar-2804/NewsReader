@@ -1,5 +1,7 @@
+import { createContext, useContext, useEffect, useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCOBiP3igSCTNviSmOURQBVJ6wZF9YD4T8",
@@ -17,6 +19,30 @@ if (!firebase.apps.length) {
 }
 
 // Export the authentication and firestore instances
-export const auth = firebase.auth();
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export const useFirestore = () => {
+  return firebase.firestore();
+};
 
 export default firebase;
