@@ -19,7 +19,6 @@ const Navbar = () => {
         console.error(error);
       });
   };
-  console.log("User logged in:", user);
   const handleSignOut = () => {
     // Sign out the current user
     firebase
