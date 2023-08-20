@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { fetchNewsArticles } from "./utils/Api";
 import NewsGrid from "./components/NewsGrid";
 import NewsList from "./components/NewsList";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -23,17 +25,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Latest News</h1>
-      <button onClick={() => setIsGridView(!isGridView)}>
-        {isGridView ? "Switch to List View" : "Switch to Grid View"}
-      </button>
-      {isGridView ? (
-        <NewsGrid articles={articles} />
-      ) : (
-        <NewsList articles={articles} />
-      )}
-    </div>
+    <Provider store={store}>
+      <div>
+        <h1>Latest News</h1>
+        <button onClick={() => setIsGridView(!isGridView)}>
+          {isGridView ? "Switch to List View" : "Switch to Grid View"}
+        </button>
+        {isGridView ? (
+          <NewsGrid articles={articles} />
+        ) : (
+          <NewsList articles={articles} />
+        )}
+      </div>
+    </Provider>
   );
 };
 
