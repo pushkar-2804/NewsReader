@@ -7,6 +7,7 @@ import {
   removeFavorite,
   setFavorites,
 } from "../store/slices/FavouriteSlice";
+import ArticleCard from "./ArticleCard";
 
 const NewsList = ({ articles }) => {
   const dispatch = useDispatch();
@@ -91,29 +92,13 @@ const NewsList = ({ articles }) => {
   return (
     <div className="grid grid-cols-1 gap-4">
       {articles.map((article) => (
-        <div key={article.url} className="border p-4 rounded-md">
-          <img
-            src={article.urlToImage}
-            alt={article.title}
-            className="mb-2 rounded-md"
-          />
-          <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
-          <p className="text-gray-700">{article.description}</p>
-          {loggedIn ? (
-            <button
-              className={`mt-2 ${
-                isArticleFavorite(article)
-                  ? "bg-red-500 hover:bg-red-600"
-                  : "bg-blue-500 hover:bg-blue-600"
-              } text-white py-1 px-4 rounded`}
-              onClick={() => handleFavorite(article)}
-            >
-              {isArticleFavorite(article) ? "Unfavorite" : "Favorite"}
-            </button>
-          ) : (
-            <p className="mt-2 text-gray-600">Log in to favorite articles</p>
-          )}
-        </div>
+        <ArticleCard
+          key={article.url}
+          article={article}
+          loggedIn={loggedIn}
+          isFavorite={isArticleFavorite(article)}
+          handleFavorite={handleFavorite}
+        />
       ))}
     </div>
   );
