@@ -1,11 +1,11 @@
 // pages/index.js
-"use client";
 import React, { useEffect, useState } from "react";
-import { fetchNewsArticles } from "./utils/Api";
-import NewsGrid from "./components/NewsGrid";
-import NewsList from "./components/NewsList";
 
-const Home = () => {
+import NewsList from "../components/NewsList";
+import NewsGrid from "../components/NewsGrid";
+import { fetchNewsArticles } from "../utils/Api";
+
+const HomePage = () => {
   const [articles, setArticles] = useState([]);
   const [isGridView, setIsGridView] = useState(false);
 
@@ -37,4 +37,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

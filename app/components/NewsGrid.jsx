@@ -3,9 +3,9 @@ import React from "react";
 const NewsGrid = ({ articles }) => {
   return (
     <div className="news-grid">
-      {articles.map((article) => (
-        <div key={article.id} className="news-item">
-          <img src={article.image} alt={article.title} />
+      {articles.map((article, index) => (
+        <div key={index} className="news-item">
+          <img src={article.urlToImage} alt={article.title} />
           <h2>{article.title}</h2>
         </div>
       ))}
